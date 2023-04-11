@@ -1,0 +1,12 @@
+Note:
+wdpa_mar2023: March 2023 version of the UNEP-WCMC World Database on Protected Areas (available for download from https://www.protectedplanet.net/en).
+
+# Elongation 
+
+1. ALTER TABLE wdpa_mar2023 ADD COLUMN elongation double precision;
+
+2. UPDATE wdpa_mar2023
+SET elongation = ST_Length(ST_GeometryN(ST_MinimumBoundingRectangle(wdpa_mar2023.geom), 1)) / ST_Length(ST_GeometryN(ST_MinimumBoundingRectangle(wdpa_mar2023.geom), 2));
+
+Note: Here, ST_GeometryN is used to obtain each side of the oriented minimum bounding box, and ST_Length is used to obtain the length of each side.
+The polygons returned by ST_MinimumBoundingRectangle have four sides, so the values "1" to "4" can be used with ST_GeometryN to obtain each side of the polygon.
