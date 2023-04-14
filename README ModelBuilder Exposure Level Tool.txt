@@ -5,7 +5,7 @@ ModelBuilder Exposure Level tool (ArcGIS v 10.8).
 We performed the ModelBuilder Exposure Level Tool to develop an analytical workflow for calculating the exposure level of protected lands, which aids in the reproducibility and replicability of our analysis. However, for the purposes of "The Geometry of Global Protected Lands: Implications for Nature Conservation and Human Well-Being," we performed the exposure level analysis by subsetting the WDPA database by continents and conducting the analysis step-by-step to reduce computational burden.
 
 #########
-Note: A geodatabase (Exposure tool GDB)  is provided to facilitate an example of the calculation of the exposure level, including:
+Note: A geodatabase (Exposure Level Geodatabase/ ExposureTool GDB.gdb.rar) is provided to facilitate an example of the calculation of the exposure level, including:
 * Cultural regions database.
 * Biomes database.
 * WDPA database (subset of protected areas).
