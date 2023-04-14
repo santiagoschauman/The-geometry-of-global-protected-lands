@@ -1,0 +1,24 @@
+######### 
+Division, Splitting index and Effective size
+######### 
+
+Note: 
+The calculation of Division, Splitting index and Effective size require to separate all the multipart features into its individual component features (i.e. explode polygons).
+Therefore, it's recommended to previusly  explode polygons in PostGIS.  
+
+wdpa_mar2023: March 2023 version of the UNEP-WCMC World Database on Protected Areas (available for download from https://www.protectedplanet.net/en).
+
+# Explode polygons
+CREATE TABLE wdpa_mar2023_explode AS (SELECT wdpaid, (ST_Dump(geom)).geom
+FROM wdpa_mar2023);
+
+# Division, Splitting index and Effective size
+
+SELECT wdpaid,
+SUM(ST_Area(wdpa_mar2023_explode.geom)^2) / SUM(ST_Area(wdpa_mar2023_explode.geom)) as Effective size, 
+1-(SUM(ST_Area(wdpa_mar2023_explode.geom)^2) / SUM(ST_Area(wdpa_mar2023_explode.geom)))/ (SUM(ST_Area(wdpa_mar2023_explode.geom))) as Division,
+SUM(ST_Area(wdpa_mar2023_explode.geom)) / (SUM(ST_Area(wdpa_mar2023_explode.geom)^2) / SUM(ST_Area(wdpa_mar2023_explode.geom))) as Splitting index	 																		
+FROM wdpa_mar2023_explode
+GROUP BY  wdpaid;
+
+

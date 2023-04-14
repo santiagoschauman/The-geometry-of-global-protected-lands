@@ -1,0 +1,29 @@
+#########
+Polsby-Popper
+#########
+
+Note: Most metrics used to characterize the geometry of protected areas require some basic geometric calculations (i.e. perimeter and area).
+Therefore, it's recommended to calculate previusly these metrics in PostGIS.  
+
+wdpa_mar2023: March 2023 version of the UNEP-WCMC World Database on Protected Areas (available for download from https://www.protectedplanet.net/en).
+
+# Area 
+
+1. ALTER TABLE wdpa_mar2023 ADD COLUMN area double precision;
+
+2. UPDATE wdpa_mar2023
+SET area = ST_Area(wdpa_mar2023.geom); 
+
+# Perimeter
+
+1. ALTER TABLE wdpa_mar2023 ADD COLUMN perimeter double precision;
+
+2. UPDATE wdpa_mar2023
+SET perimeter = ST_Perimeter(wdpa_mar2023.geom); 
+
+# Polsby-Popper
+
+1. ALTER TABLE wdpa_mar2023 ADD COLUMN polsby_popper double precision;
+
+2. UPDATE wdpa_mar2023
+SET polsby_popper = 4 * pi() * (area/(perimeter^2));

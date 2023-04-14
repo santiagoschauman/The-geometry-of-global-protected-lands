@@ -1,0 +1,26 @@
+#########
+Maximum depth and Depth compactness
+#########
+
+Note:
+wdpa_mar2023: March 2023 version of the UNEP-WCMC World Database on Protected Areas (available for download from https://www.protectedplanet.net/en).
+
+#Maximum depth 
+
+Calculated as the distance from the PA innermost point to its closer edge.
+
+For maximum depth calculation we transformed the PA polygon network into a one of PA edges using the “feature to line” tool in ArcGIS Pro 2.8. 
+We calculated the distance to the closest edge for cells with a spatial resolution of 300 m. Finally, we calculated the “maximum depth” 
+for each polygon as the maximum distance to the closest edge using the “Zonal statistics as table” tool in ArcGIS Pro 2.8.
+
+# Depth compactness
+
+Calculated as the ratio of the PA Maximum depth to the radius of a circle equal in size to the PA.
+
+Translated into PostGIS:
+
+1. ALTER TABLE wdpa_mar2023 ADD COLUMN depth_compactness double precision;
+
+2. UPDATE wdpa_mar2023
+SET depth_compactness = Maximum depth/|/area/pi(); 
+
