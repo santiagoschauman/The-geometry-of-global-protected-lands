@@ -1,0 +1,1 @@
+-ModelBuilder example for calculating the exposure level of protected areas (performed in ArcGIS v 10.8).
