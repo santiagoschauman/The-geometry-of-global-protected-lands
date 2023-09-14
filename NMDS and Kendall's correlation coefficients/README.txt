@@ -1,1 +1,0 @@
--Code for calculating the NMDS ordination model and Kendall's correlation coefficients (R v 4.2.1) 
